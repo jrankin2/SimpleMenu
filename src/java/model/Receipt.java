@@ -72,4 +72,15 @@ public class Receipt {
     public void setSuggestedGratuity(double suggestedGratuity) {
         this.suggestedGratuity = suggestedGratuity;
     }
+    
+    public String toHTML(){
+        String html = "<ul>";
+        
+        html += "<li>SubTotal: $" + String.format("%.02f", subTotal) + "</li>";
+        html += "<li>Tax: $" + String.format("%.02f", tax) + "</li>";
+        html += "<li>Net Total: $" + String.format("%.02f", netTotal) + "</li>";
+        html += "<li>Suggested Gratuity: $" + String.format("%.02f", suggestedGratuity) + "</li>";
+        html += "</ul>";
+        return html;
+    }
 }

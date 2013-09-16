@@ -16,9 +16,10 @@ public class MenuService implements IMenuService {
 
     {
         menu = new ArrayList<MenuItem>(){{
-            add(new MenuItem("Large Beverage", 2.00));
-            add(new MenuItem("Small Beverage", 1.00));
-            add(new MenuItem("Cheeseburger", 5.00));
+            add(new MenuItem("Chicken Nuggets", 2.00, "img/chicken_nuggets.png"));
+            add(new MenuItem("Chocolate Chip Cookie", 1.00, "img/chocolate_chip_cookie.png"));
+            add(new MenuItem("Double Cheeseburger", 5.00, "img/double_cheeseburger.png"));
+            add(new MenuItem("Pancakes", 3.00, "img/pancakes.png"));
             
         }};
         

@@ -1,0 +1,102 @@
+/* 
+    Document   : menuStyle
+    Created on : Sep 16, 2013, 1:10:56 AM
+    Author     : Joe
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.item{
+    display:block;
+    border: 1px solid #003333;
+    border-radius:10px;
+    width:325px;
+    height:100px;
+    margin:5px;
+    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #0F6FFF 100%);
+}
+
+.item:hover{
+    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #00A3EF 100%);
+}
+
+.item.selected{
+    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #FFA229 100%);
+}
+
+.item img{
+    margin-top:-30px;
+    float:left;
+    margin-left:5px;
+}
+
+.item .title{
+    font-size:15pt;
+    font-weight:bold;
+
+    float:right;
+    margin-right:20px;
+    text-align: center;
+    display:block;
+}
+
+.item .price{
+    float:right;
+    clear:right;
+    margin-right:20px;
+    margin-top: 10px;
+}
+
+#menuItems{
+}
+
+#orderItems{
+    
+}
+
+#menu{
+    position:absolute;
+    width:180px;
+}
+
+.ui-menu-item{
+    font-size:12pt;
+}
+
+#menuForm{
+    position:fixed;
+    right:10px;
+    top:80px;
+}
+
+
+
+#finalOrder{
+}
+
+#receipt{
+    text-align:left;
+}
+
+#receipt h1{
+    text-align:center;
+}
+
+.box{
+    height:100%;
+    width:340px;
+    border:1px solid black;
+    border-radius:10px;
+}
+
+.box h1{
+    text-align:center;
+}
+
+.right{
+    position:absolute;
+    left:370px;
+    top:10px;
+    width:340px;
+    height:auto;
+}

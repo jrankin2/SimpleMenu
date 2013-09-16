@@ -9,14 +9,22 @@ package model;
  * @author jrankin2
  */
 public class MenuItem {
+
     private String name;
     private double price;
+    private String imagePath;
 
     public MenuItem(String name, double price) {
         this.name = name;
         this.price = price;
     }
-    
+
+    public MenuItem(String name, double price, String imagePath) {
+        this.name = name;
+        this.price = price;
+        this.imagePath = imagePath;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -32,6 +40,22 @@ public class MenuItem {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String toHTML(int itemNumber) {
+        String html = "";
+        html += "<div class=\"item\" id=\"i" + itemNumber + "\">";
+        html += "<img src=\"" + imagePath + "\" />";
+        html += "<span class=\"title\">" + name + "</span>";
+        html += "<span class=\"price\">"+ String.format("$%.02f",price) + "</span>";
+        html += "</div>";
+        return html;
+    }
 }

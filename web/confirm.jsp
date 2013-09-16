@@ -13,32 +13,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Receipt</title>
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/excite-bike/jquery-ui.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="css/menuStyle.css" type="text/css" />
+
+
     </head>
     <body>
-        <ul>
+
+        <div id="finalOrder" class="box">
+            <h1>Your Order</h1>
             <%
                 List<MenuItem> menu = (List<MenuItem>) request.getAttribute("menu");
                 for (int i = 0; i < menu.size(); i++) {
                     MenuItem item = menu.get(i);
-
-                    out.println("<li>");
-                    //out.println("<input type='checkbox' name='i"+i+"'/>");
-                    out.print(item.getName() + " - $" + String.format("%.02f", item.getPrice()) );
-                    out.println("</li>");
+                    out.println(item.toHTML(i));
                 }
             %>
-        </ul>
+        </div>
+        <div id="receipt" class="box right">
+            <h1>Receipt</h1>
+            ${receipt.toHTML()}
+        </div>
 
-        Your Receipt:
-        <ul>
-            <li>SubTotal: $${receipt.subTotal}</li>
-            <li>Tax: $${receipt.tax}</li>
-            <li>Net Total: $${receipt.netTotal}</li>
-            <li>Suggested Gratuity: $${receipt.suggestedGratuity}</li>
-        </ul>
-        
+        <br/>
         <a href="MenuController">Back to Menu</a>
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script>
+            $('a').button();
+        </script>
     </body>
 </html>
