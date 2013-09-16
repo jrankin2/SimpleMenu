@@ -1,12 +1,13 @@
 $(document).ready(function() {
     $('#menu').hide();
+    $('#menuForm input').button();
 
     $('#menu').mouseleave(function() {//not mouseout because it bubbles
         $('#menu').hide();
         $('.selected').removeClass('selected');
     });
 
-    $('body').on('click', '.item', function(e) {
+    $('body').on('click', '.item', function(e) {//dynamic click handler
         var item = $(e.currentTarget);
         //add selected - might not be necessary
         $('.selected').removeClass('selected');
@@ -28,13 +29,28 @@ $(document).ready(function() {
         var menuItem = $(e.currentTarget);
         if (!menuItem.hasClass('ui-state-disabled')) {
             $('#menu').hide();
-            
-            if ($('.selected').parent().attr('id') === 'menuItems') {
-                $('#orderItems').append($('.selected').remove());
+            var selected = $('.selected');
+            if (selected.parent().attr('id') === 'menuItems') {
+                $('#orderItems').animate({width: 340, height: $('#orderItems').height() + selected.outerHeight() + 5}, 900, 'swing', function() {
+                    $('#orderItems').attr('style', '');
+                });
+                selected.effect('transfer', {to: $('#orderItems'), className: 'ui-effects-transfer'}, 450, function() {
+                    selected.fadeOut(400, function() {
+                        $('#orderItems').append(selected.remove().hide().fadeIn());
+
+                    });
+                });
             } else {
-                $('#menuItems').append($('.selected').remove());
+                $('#menuItems').animate({width: 340, height: $('#menuItems').height() + selected.outerHeight() + 5}, 900, 'swing', function() {
+                    $('#menuItems').attr('style', '');
+                });
+                selected.effect('transfer', {to: $('#menuItems'), className: 'ui-effects-transfer'}, 450, function() {
+                    selected.fadeOut(400, function() {
+                        $('#menuItems').append(selected.remove().hide().fadeIn());
+                    });
+                });
             }
-            
+
             $('.selected').removeClass('selected');
         }
     });
@@ -57,9 +73,9 @@ $(document).ready(function() {
             newForm.append(input);
         });
         $('body').append(newForm);
-        
+
         newForm.submit();
     });
 
-    $('#menuForm input').button();
+
 });

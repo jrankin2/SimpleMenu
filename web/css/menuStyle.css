@@ -51,7 +51,7 @@
 }
 
 #orderItems{
-    
+    background-color:white;
 }
 
 #menu{
@@ -99,4 +99,8 @@
     top:10px;
     width:340px;
     height:auto;
+}
+
+.ui-effects-transfer {
+    border: 1px dotted black;
 }
