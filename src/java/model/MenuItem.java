@@ -9,11 +9,15 @@ package model;
  * @author jrankin2
  */
 public class MenuItem {
-
+    private long dbId;
     private String name;
     private double price;
     private String imagePath;
 
+    public MenuItem(){
+        
+    }
+    
     public MenuItem(String name, double price) {
         this.name = name;
         this.price = price;
@@ -25,6 +29,14 @@ public class MenuItem {
         this.imagePath = imagePath;
     }
 
+    public long getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(long dbId) {
+        this.dbId = dbId;
+    }
+    
     public double getPrice() {
         return price;
     }

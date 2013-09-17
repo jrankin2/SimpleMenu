@@ -15,14 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 public class OrderCalculatorService {
     
     private HttpServletRequest request;
+    private IMenuService menuService;
 
-    public OrderCalculatorService(HttpServletRequest request) {
+    public OrderCalculatorService(HttpServletRequest request, IMenuService menuService) {
         this.request = request;
+        this.menuService = menuService;
     }
     
     
     public List<MenuItem> selectedItems(){
-        IMenuService menuService = new MenuService();
         List<MenuItem> menu = menuService.getMenu();
         
         List<MenuItem> selectedItems = new ArrayList<MenuItem>();

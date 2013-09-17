@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DBMenuService;
+import model.IMenuService;
 import model.OrderCalculatorService;
 
 /**
@@ -32,8 +34,9 @@ public class OrderConfirmationController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            IMenuService menuService = new DBMenuService();
+            OrderCalculatorService orderCalculator = new OrderCalculatorService(request, menuService);
             
-            OrderCalculatorService orderCalculator = new OrderCalculatorService(request);
             
             request.setAttribute("menu", orderCalculator.selectedItems());
             request.setAttribute("receipt", orderCalculator.getReceipt());
