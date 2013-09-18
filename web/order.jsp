@@ -15,10 +15,6 @@
         <title>Order</title>
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/excite-bike/jquery-ui.css" type="text/css" media="all" />
         <link rel="stylesheet" href="css/menuStyle.css" type="text/css" />
-
-
-        
-
     </head>
     <body>
         <div id="orderingControls" class="box">
@@ -37,10 +33,6 @@
                 <h1>Current Order</h1>
             </div>
         </div>
-
-
-
-
         <ul id="menu">
             <li class="add"><a href="#">Add to order</a></li>
             <li class="remove"><a href="#">Remove from order</a></li>
