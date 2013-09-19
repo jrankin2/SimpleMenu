@@ -21,11 +21,7 @@ public class DBMenuService implements IMenuService {
     IMenuItemDAO menuItemDAO;
 
     public DBMenuService() {
-        db = new MySQLAccessor("com.mysql.jdbc.Driver",
-                "jdbc:mysql://localhost:3306/restaurant",
-                "root",
-                "admin");
-        menuItemDAO = new MenuItemDAO(db);
+        menuItemDAO = new MenuItemDAO();
     }
 
     @Override

@@ -7,6 +7,7 @@ package model;
 import dbservice.DBAccessor;
 import dbservice.DbAccessException;
 import dbservice.GenericDAO;
+import dbservice.MySQLAccessor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,12 @@ public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO{
     private static final String DELETE_ALL_MENUITEMS = "DELETE FROM menu_item";
     private static final String SELECT_ALL_MENUITEMS = "SELECT * FROM menu_item";
     
-    public MenuItemDAO(DBAccessor db){
+    public MenuItemDAO(){
+        db = new MySQLAccessor("com.mysql.jdbc.Driver",
+                "jdbc:mysql://localhost:3306/restaurant",
+                "root",
+                "admin");
         super.setDb(db);
-        this.db = db;
     }
     
     @Override
