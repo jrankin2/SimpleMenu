@@ -21,13 +21,13 @@
             </div>
             
             <div class="form-group">
-                <label for="price">Name</label>
-                <input type="text" name="price" id="priceInput" class="form-control" placeholder="Name">
+                <label for="price">Price</label>
+                <input type="text" name="price" id="priceInput" class="form-control" placeholder="Price">
             </div>
             
             <div class="form-group">
-                <label for="imagePath">Name</label>
-                <input type="text" name="imagePath" id="imagePathInput" class="form-control" placeholder="Name">
+                <label for="imagePath">Image Path</label>
+                <input type="text" name="imagePath" id="imagePathInput" class="form-control" placeholder="Image Path">
             </div>
             <input type="submit" value="Go"/>
         </form>
