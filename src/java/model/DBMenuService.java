@@ -6,7 +6,6 @@ package model;
 
 import dbservice.DBAccessor;
 import dbservice.DbAccessException;
-import dbservice.MySQLAccessor;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +24,6 @@ public class DBMenuService implements IMenuService {
     }
 
     @Override
-    public void setMenu(List<MenuItem> menu) {
-        //lol not
-    }
-
-    @Override
     public List<MenuItem> getMenu() {
         List<MenuItem> menu = null;
         try {
@@ -38,5 +32,41 @@ public class DBMenuService implements IMenuService {
             Logger.getLogger(DBMenuService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return menu;
+    }
+    
+    public MenuItem addMenuItem(MenuItem item){
+        try {
+            menuItemDAO.saveMenuItem(item);
+        } catch (DbAccessException ex) {
+            Logger.getLogger(DBMenuService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return item;
+    }
+    
+    public MenuItem updateMenuItem(MenuItem item){
+        try {
+            menuItemDAO.saveMenuItem(item);
+        } catch (DbAccessException ex) {
+            Logger.getLogger(DBMenuService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return item;
+    }
+    
+    public void deleteMenuItem(MenuItem item){
+        try {
+            menuItemDAO.deleteMenuItem(item);
+        } catch (DbAccessException ex) {
+            Logger.getLogger(DBMenuService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public MenuItem findMenuItemById(String id){
+        try {
+            return menuItemDAO.findMenuItemById(id);
+        } catch (DbAccessException ex) {
+            Logger.getLogger(DBMenuService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

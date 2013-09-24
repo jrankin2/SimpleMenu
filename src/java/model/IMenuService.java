@@ -11,6 +11,9 @@ import java.util.List;
  * @author jrankin2
  */
 public interface IMenuService {
-    public void setMenu(List<MenuItem> menu);
     public List<MenuItem> getMenu();
+    public MenuItem addMenuItem(MenuItem item);
+    public MenuItem updateMenuItem(MenuItem item);
+    public void deleteMenuItem(MenuItem item);
+    public MenuItem findMenuItemById(String id);
 }

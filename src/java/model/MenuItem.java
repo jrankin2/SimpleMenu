@@ -4,20 +4,23 @@
  */
 package model;
 
+import javax.servlet.http.HttpServletRequest;
+import org.jboss.weld.context.http.HttpRequestContext;
+
 /**
  *
  * @author jrankin2
  */
 public class MenuItem {
+
     private long dbId;
     private String name;
     private double price;
     private String imagePath;
 
-    public MenuItem(){
-        
+    public MenuItem() {
     }
-    
+
     public MenuItem(String name, double price) {
         this.name = name;
         this.price = price;
@@ -36,7 +39,7 @@ public class MenuItem {
     public void setDbId(long dbId) {
         this.dbId = dbId;
     }
-    
+
     public double getPrice() {
         return price;
     }
@@ -66,8 +69,21 @@ public class MenuItem {
         html += "<div class=\"item\" id=\"i" + itemNumber + "\">";
         html += "<img src=\"" + imagePath + "\" />";
         html += "<span class=\"title\">" + name + "</span>";
-        html += "<span class=\"price\">"+ String.format("$%.02f",price) + "</span>";
+        html += "<span class=\"price\">" + String.format("$%.02f", price) + "</span>";
         html += "</div>";
         return html;
+    }
+
+    public static MenuItem fromRequest(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String sPrice = request.getParameter("price");
+        double price = (sPrice == null ? 0.0 : Double.valueOf(sPrice));
+        String imagePath = request.getParameter("imagePath");
+        
+        MenuItem item = new MenuItem(name, price, imagePath);
+        item.setDbId(Long.valueOf(id));
+        
+        return null;
     }
 }

@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface IMenuItemDAO {
     
-    public void saveMenuItem(MenuItem ticket) throws DbAccessException;
-    public void deleteMenuItem(MenuItem ticket) throws DbAccessException;
+    public void saveMenuItem(MenuItem item) throws DbAccessException;
+    public void deleteMenuItem(MenuItem item) throws DbAccessException;
     public MenuItem findMenuItemById(String id) throws DbAccessException;
     public List<MenuItem> getAllMenuItems() throws DbAccessException;
     public void deleteAllMenuItems() throws DbAccessException;
