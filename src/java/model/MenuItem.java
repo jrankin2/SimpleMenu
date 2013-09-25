@@ -74,16 +74,35 @@ public class MenuItem {
         return html;
     }
 
-    public static MenuItem fromRequest(HttpServletRequest request){
-        String id = request.getParameter("id");
+    public MenuItem updateFromRequest(HttpServletRequest request){
         String name = request.getParameter("name");
+        if(name != null){
+            this.setName(name);
+        }
+        
         String sPrice = request.getParameter("price");
-        double price = (sPrice == null ? 0.0 : Double.valueOf(sPrice));
+        if(sPrice != null){
+            double price = Double.valueOf(sPrice);
+            this.setPrice(price);
+        }
+        
         String imagePath = request.getParameter("imagePath");
+        if(imagePath != null){
+            this.setImagePath(imagePath);
+        }
         
-        MenuItem item = new MenuItem(name, price, imagePath);
-        item.setDbId(Long.valueOf(id));
-        
-        return null;
+        return this;
+    }
+    
+    public static MenuItem createFromRequest(HttpServletRequest request){
+        MenuItem item = new MenuItem();
+        item.updateFromRequest(request);
+        System.out.println("created: " + item);
+        return item;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" + "dbId=" + dbId + ", name=" + name + ", price=" + price + ", imagePath=" + imagePath + '}';
     }
 }

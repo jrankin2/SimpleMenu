@@ -34,6 +34,7 @@ public class DBMenuService implements IMenuService {
         return menu;
     }
     
+    @Override
     public MenuItem addMenuItem(MenuItem item){
         try {
             menuItemDAO.saveMenuItem(item);
@@ -43,7 +44,9 @@ public class DBMenuService implements IMenuService {
         return item;
     }
     
+    @Override
     public MenuItem updateMenuItem(MenuItem item){
+        System.out.println("updating item" + item.toString());
         try {
             menuItemDAO.saveMenuItem(item);
         } catch (DbAccessException ex) {
@@ -52,6 +55,7 @@ public class DBMenuService implements IMenuService {
         return item;
     }
     
+    @Override
     public void deleteMenuItem(MenuItem item){
         try {
             menuItemDAO.deleteMenuItem(item);

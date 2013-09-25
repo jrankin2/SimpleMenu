@@ -28,10 +28,11 @@ import model.MenuItem;
  */
 @WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
+
     private static final String ADD_UPDATE_PAGE = "admin/modifyMenuItem.jsp";
     private static final String VIEW_PAGE = "admin/index.jsp";
-    
-    
+    private IMenuService menuService;
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -46,82 +47,117 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher(VIEW_PAGE);
         response.setContentType("text/html;charset=UTF-8");
+
+        if(menuService == null){
+            menuService = new DBMenuService();
+        }
         
-        IMenuService menuService = new DBMenuService();
-        request.setAttribute("menuItems", menuService.getMenu());
+        try{
+            
+        }catch(Exception e){
+            
+        }
         
-        
-        
-        
-        
+
+
+
+
+
         String action = request.getParameter("a");
-        switch(CRUDAction.toCRUDAction(action)){
+        MenuItem item = itemFromRequest(request);
+        request.setAttribute("item", item);
+        request.setAttribute("a", action);
+        
+        switch (CRUDAction.toCRUDAction(action)) {
             case Create:
+                item = MenuItem.createFromRequest(request);
+                menuService.addMenuItem(item);
                 view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
                 break;
             case Read:
                 view = request.getRequestDispatcher(VIEW_PAGE);
                 break;
             case Update:
-                String sId = request.getParameter("id");
-                MenuItem item;
-                if(sId != null){
-                    item = menuService.findMenuItemById(sId);
+                if (item != null) {
+                    item.updateFromRequest(request);
+                    menuService.updateMenuItem(item);
+                    view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
+                } else {
+                    //item not found - error?
+                    view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
                 }
-                
-                
-                view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
                 break;
             case Delete:
+                if(item != null){
+                    menuService.deleteMenuItem(item);
+                }
                 view = request.getRequestDispatcher(VIEW_PAGE);
                 break;
             case NoAction:
                 view = request.getRequestDispatcher(VIEW_PAGE);
                 break;
         }
-        
+        request.setAttribute("menuItems", menuService.getMenu());
+
         view.forward(request, response);
+
+    }
+
+    private MenuItem itemFromRequest(HttpServletRequest request) {
+        String sId = request.getParameter("id");
+        MenuItem item = null;
+        if (sId != null && !sId.isEmpty()) {
+            item = menuService.findMenuItemById(sId);
+        }
+        return item;
+    }
+
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP
+         * <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response
+        )
+            throws ServletException
+        , IOException {
+            processRequest(request, response);
+        }
+
+        /**
+         * Handles the HTTP
+         * <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response
+        )
+            throws ServletException
+        , IOException {
+            processRequest(request, response);
+        }
+
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
         
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+            () {
         return "Short description";
-    }// </editor-fold>
-}
+        }// </editor-fold>
+    }

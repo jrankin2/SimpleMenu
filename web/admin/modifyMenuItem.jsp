@@ -12,24 +12,29 @@
         <title>Add/Edit MenuItem</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     </head>
-    <body>
-        <form method="POST" action="AdminController" class="form form-inline">
-            <input type="hidden" name="id" value="${id}" />
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="nameInput" class="form-control" placeholder="Name">
-            </div>
-            
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="text" name="price" id="priceInput" class="form-control" placeholder="Price">
-            </div>
-            
-            <div class="form-group">
-                <label for="imagePath">Image Path</label>
-                <input type="text" name="imagePath" id="imagePathInput" class="form-control" placeholder="Image Path">
-            </div>
-            <input type="submit" value="Go"/>
-        </form>
+    <body style="padding-top:20px;">
+        <div class="container">
+
+
+            <form method="POST" action="AdminController" class="form-horizontal">
+                <input type="hidden" name="id" value="${item.dbId}" />
+                <input type="hidden" name="a" value="${a}" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="nameInput" class="form-control" value="${item.name}" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" name="price" id="priceInput" class="form-control" value="${item.price}" placeholder="Price">
+                </div>
+
+                <div class="form-group">
+                    <label for="imagePath">Image Path</label>
+                    <input type="text" name="imagePath" id="imagePathInput" class="form-control" value="${item.imagePath}" placeholder="Image Path">
+                </div>
+                <input type="submit" value="Go"/>
+            </form>
+        </div>
     </body>
 </html>

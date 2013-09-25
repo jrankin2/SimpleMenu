@@ -16,20 +16,21 @@ import java.util.Map;
  *
  * @author jrankin2
  */
-public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO{
+public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO {
+
     private DBAccessor db;
     private static final String TBL_MENUITEM = "menu_item";
     private static final String DELETE_ALL_MENUITEMS = "DELETE FROM menu_item";
     private static final String SELECT_ALL_MENUITEMS = "SELECT * FROM menu_item";
-    
-    public MenuItemDAO(){
+
+    public MenuItemDAO() {
         db = new MySQLAccessor("com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost:3306/restaurant",
                 "root",
-                "admin");
+                "");
         super.setDb(db);
     }
-    
+
     @Override
     public final void saveMenuItem(MenuItem ticket) throws DbAccessException {
         super.save(TBL_MENUITEM, ticket, "id");
@@ -42,26 +43,33 @@ public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO{
 
     @Override
     public final MenuItem findMenuItemById(String id) throws DbAccessException {
-        return super.findWhere(TBL_MENUITEM, "id", new Long(id));
+        if (id != null) {
+            return super.findWhere(TBL_MENUITEM, "id", new Long(id));
+        }
+        return null;
     }
 
     @Override
     public final List<MenuItem> getAllMenuItems() throws DbAccessException {
         return super.getRecordsFromSQL(SELECT_ALL_MENUITEMS);
     }
-    
+
     @Override
     public final void deleteAllMenuItems() throws DbAccessException {
         super.delete(TBL_MENUITEM, null, null);
     }
-    
+
     @Override
     public final MenuItem entityFromMap(Map<String, Object> data) {
         MenuItem item = new MenuItem();
-        item.setDbId(new Long(data.get("id").toString()));
-        item.setName(data.get("name").toString());
-        item.setPrice(Double.valueOf(data.get("price").toString()));
-        item.setImagePath(data.get("image_path").toString());
+        try {
+            item.setDbId(new Long(data.get("id").toString()));
+            item.setName(data.get("name").toString());
+            item.setPrice(Double.valueOf(data.get("price").toString()));
+            item.setImagePath(data.get("image_path").toString());
+        } catch (Exception e) {
+        }
+
         return item;
     }
 
@@ -75,5 +83,4 @@ public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO{
 
         return fields;
     }
-    
 }
