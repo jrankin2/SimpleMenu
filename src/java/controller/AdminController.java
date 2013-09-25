@@ -70,21 +70,26 @@ public class AdminController extends HttpServlet {
         
         switch (CRUDAction.toCRUDAction(action)) {
             case Create:
-                item = MenuItem.createFromRequest(request);
-                menuService.addMenuItem(item);
-                view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
+                if(requestHasItem(request)){
+                    item = MenuItem.createFromRequest(request);
+                    menuService.addMenuItem(item);
+                    view = request.getRequestDispatcher(VIEW_PAGE);
+                } else{
+                    view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
+                }
                 break;
             case Read:
                 view = request.getRequestDispatcher(VIEW_PAGE);
                 break;
             case Update:
-                if (item != null) {
-                    item.updateFromRequest(request);
-                    menuService.updateMenuItem(item);
+                if(requestHasItem(request) || item != null){
+                    if(item != null){
+                        item.updateFromRequest(request);
+                        menuService.updateMenuItem(item);
+                    }
                     view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
-                } else {
-                    //item not found - error?
-                    view = request.getRequestDispatcher(ADD_UPDATE_PAGE);
+                } else{
+                    view = request.getRequestDispatcher(VIEW_PAGE);
                 }
                 break;
             case Delete:
@@ -110,6 +115,12 @@ public class AdminController extends HttpServlet {
             item = menuService.findMenuItemById(sId);
         }
         return item;
+    }
+    
+    private boolean requestHasItem(HttpServletRequest request){
+        return request.getParameter("name") != null &&
+                request.getParameter("price") != null &&
+                request.getParameter("imagePath") != null;
     }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
