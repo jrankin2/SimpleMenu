@@ -16,6 +16,9 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        
+        
+        
         <div class="container">
             <div class="row">
                 <h1>Menu Items</h1>
@@ -46,6 +49,24 @@
             </div>
         </div>
 
-
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                /*
+                $('a').click(function(e) {
+                    e.preventDefault();
+                    $.get($(e.target).attr('href'), function(data) {
+                        var modal = $('.modal');
+                        if(!modal.count > 0){
+                            modal = $('<div/>').addClass('modal col-md-4 well').appendTo('body');
+                        }
+                        modal.html(data).dialog({modal:true});
+                        //alert(data);
+                    });
+                });
+                */
+            });
+        </script>
     </body>
 </html>

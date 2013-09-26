@@ -33,8 +33,10 @@
                     <label for="imagePath">Image Path</label>
                     <input type="text" name="imagePath" id="imagePathInput" class="form-control" value="${item.imagePath}" placeholder="Image Path">
                 </div>
-                <input type="submit" value="Go"/>
+                <input class="btn btn-success" type="submit" value="Go"/> <a href="AdminController" class="btn btn-danger">Back</a>
             </form>
         </div>
+
+        
     </body>
 </html>

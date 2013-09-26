@@ -5,7 +5,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DBMenuService;
 import model.IMenuService;
-import model.MenuService;
 
 /**
  *
@@ -21,7 +19,7 @@ import model.MenuService;
  */
 public class MenuController extends HttpServlet {
 
-    private static final String ORDER_PAGE = "order.jsp";
+    private static final String ORDER_PAGE = "/order.jsp";
 
     /**
      * Processes requests for both HTTP

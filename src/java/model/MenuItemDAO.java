@@ -27,7 +27,7 @@ public class MenuItemDAO extends GenericDAO<MenuItem> implements IMenuItemDAO {
         db = new MySQLAccessor("com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost:3306/restaurant",
                 "root",
-                "");
+                "admin");
         super.setDb(db);
     }
 
